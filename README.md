@@ -1,77 +1,76 @@
 # VARIABLES DE ENTORNO
 ## LOCAL
-#### SEGURIDAD
-DEBUG=True
-SECRET_KEY=django-insecure-clave-super-secreta-para-desarrollo-2024
-ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
+    #### SEGURIDAD
+    DEBUG=True
+    SECRET_KEY=django-insecure-clave-super-secreta-para-desarrollo-2024
+    ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
 
-#### BASE DE DATOS (SQLite)
-DB_ENGINE=django.db.backends.sqlite3
-DB_NAME=db.sqlite3
-DB_USER=
-DB_PASSWORD=
-DB_HOST=
-DB_PORT=
+    #### BASE DE DATOS (SQLite)
+    DB_ENGINE=django.db.backends.sqlite3
+    DB_NAME=db.sqlite3
+    DB_USER=
+    DB_PASSWORD=
+    DB_HOST=
+    DB_PORT=
 
-#### CORS - FRONTEND LOCAL
-CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173
-CORS_ALLOW_ALL_ORIGINS=False
+    #### CORS - FRONTEND LOCAL
+    CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173
+    CORS_ALLOW_ALL_ORIGINS=False
 
-#### CSRF
-CSRF_TRUSTED_ORIGINS=http://localhost:8000,http://127.0.0.1:8000
+    #### CSRF
+    CSRF_TRUSTED_ORIGINS=http://localhost:8000,http://127.0.0.1:8000
 
-#### DEBUG TOOLBAR
-ENABLE_DEBUG_TOOLBAR=True
+    #### DEBUG TOOLBAR
+    ENABLE_DEBUG_TOOLBAR=True
 
-#### EMAIL (CONSOLA)
-EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
+    #### EMAIL (CONSOLA)
+    EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 
-#### LOGGING LEVEL
-LOG_LEVEL=DEBUG
+    #### LOGGING LEVEL
+    LOG_LEVEL=DEBUG
 
 ## PROD
-#### SEGURIDAD - CRÍTICO EN PRODUCCIÓN
-DEBUG=False
-SECRET_KEY=tu-clave-super-secreta-muy-larga-y-compleja-aqui-2024-prod
-ALLOWED_HOSTS=midominio.com,www.midominio.com,api.midominio.com,tu-ip-del-servidor
+    #### SEGURIDAD - CRÍTICO EN PRODUCCIÓN
+    DEBUG=False
+    SECRET_KEY=tu-clave-super-secreta-muy-larga-y-compleja-aqui-2024-prod
+    ALLOWED_HOSTS=midominio.com,www.midominio.com,api.midominio.com,tu-ip-del-servidor
 
-#### BASE DE DATOS (PostgreSQL - RECOMENDADO)
-DB_ENGINE=django.db.backends.postgresql
-DB_NAME=mi_proyecto_db
-DB_USER=mi_proyecto_user
-DB_PASSWORD=tu-password-super-seguro-de-postgres-2024
-DB_HOST=localhost
-DB_PORT=5432
+    #### BASE DE DATOS (PostgreSQL - RECOMENDADO)
+    DB_ENGINE=django.db.backends.postgresql
+    DB_NAME=mi_proyecto_db
+    DB_USER=mi_proyecto_user
+    DB_PASSWORD=tu-password-super-seguro-de-postgres-2024
+    DB_HOST=localhost
+    DB_PORT=5432
 
-#### O ALTERNATIVAMENTE - URL DE BASE DE DATOS (para servicios cloud)
-DATABASE_URL=postgres://mi_proyecto_user:tu-password-super-seguro-de-postgres-2024@localhost:5432/mi_proyecto_db
+    #### O ALTERNATIVAMENTE - URL DE BASE DE DATOS (para servicios cloud)
+    DATABASE_URL=postgres://mi_proyecto_user:tu-password-super-seguro-de-postgres-2024@localhost:5432/mi_proyecto_db
 
-#### CORS - DOMINIOS PERMITIDOS EN PRODUCCIÓN
-CORS_ALLOWED_ORIGINS=https://midominio.com,https://www.midominio.com,https://app.midominio.com
-CORS_ALLOW_ALL_ORIGINS=False
+    #### CORS - DOMINIOS PERMITIDOS EN PRODUCCIÓN
+    CORS_ALLOWED_ORIGINS=https://midominio.com,https://www.midominio.com,https://app.midominio.com
+    CORS_ALLOW_ALL_ORIGINS=False
 
-#### CSRF - DOMINIOS SEGUROS
-CSRF_TRUSTED_ORIGINS=https://midominio.com,https://www.midominio.com,https://api.midominio.com
+    #### CSRF - DOMINIOS SEGUROS
+    CSRF_TRUSTED_ORIGINS=https://midominio.com,https://www.midominio.com,https://api.midominio.com
 
-#### DEBUG TOOLBAR (DESACTIVADO)
-ENABLE_DEBUG_TOOLBAR=False
+    #### DEBUG TOOLBAR (DESACTIVADO)
+    ENABLE_DEBUG_TOOLBAR=False
 
-#### EMAIL PRODUCCIÓN
-EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER=tu-email@gmail.com
-EMAIL_HOST_PASSWORD=tu-app-password-de-gmail
+    #### EMAIL PRODUCCIÓN
+    EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+    EMAIL_HOST=smtp.gmail.com
+    EMAIL_PORT=587
+    EMAIL_USE_TLS=True
+    EMAIL_HOST_USER=tu-email@gmail.com
+    EMAIL_HOST_PASSWORD=tu-app-password-de-gmail
 
-#### SEGURIDAD ADICIONAL
-SECURE_HSTS_SECONDS=31536000
-SECURE_HSTS_INCLUDE_SUBDOMAINS=True
-SECURE_HSTS_PRELOAD=True
+    #### SEGURIDAD ADICIONAL
+    SECURE_HSTS_SECONDS=31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+    SECURE_HSTS_PRELOAD=True
 
-#### LOGGING
-LOG_LEVEL=ERROR
-
+    #### LOGGING
+    LOG_LEVEL=ERROR
 
 # CREAR TODAS LAS MIGRACIONES
     python3 manage.py makemigrations
