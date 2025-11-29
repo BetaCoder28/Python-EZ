@@ -1,0 +1,1 @@
+# Esta app contiene funcionalidades compartidas
