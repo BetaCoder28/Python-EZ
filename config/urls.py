@@ -16,6 +16,7 @@ urlpatterns = [
     #API URLS
     path('api/v1/', include('apps.authors.urls')),
     path('api/v1/',include('apps.genres.urls')),
+    path('api/v1/',include('apps.books.urls')),
 ]
 
 
