@@ -3,6 +3,10 @@ __pycache__/
 /__pycache__
 
 /migrations/*
+migrations/
+*/migrations
+*/migrations/
+*/migrations/*
 
 .venv/
 .venv/*
