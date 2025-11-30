@@ -15,12 +15,6 @@ class AuthorSerializer(serializers.ModelSerializer): #para crear/actualizar
         if value > 100:
             raise serializers.ValidationError("Edad no valida")
         return value
-    
-
-    def soft_delete(self):
-        """ Method to soft delete an author """
-        self.instance.is_active = False
-        self.instance.save()
 
 
 class AuthorListSerializer(serializers.ModelSerializer): #Para listar
