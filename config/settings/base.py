@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY SETTINGS
 SECRET_KEY = config('SECRET_KEY', default='clave-por-defecto') #clave cripto para seguridad de django
 DEBUG = config('DEBUG', default=True, cast=bool)
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv()) #Dominios permitidos para servir el API
+ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv()) #Dominios permitidos para servir el API
 
 # Application definition
 DJANGO_APPS = [
@@ -74,16 +74,27 @@ TEMPLATES = [
 ]
 
 # DATABASES
-DATABASES = {
-    'default': {
-        'ENGINE': config('DB_ENGINE', default='django.db.backends.sqlite3'),
-        'NAME': config('DB_NAME', default = BASE_DIR / 'db.sqlite3'),
-        'USER' : config('DB_USER', default = ''),
-        'PASSWORD' : config('DB_PASSWORD', default = ''),
-        'HOST' : config('DB_HOST', default = ''),
-        'PORT' : config('DB_PORT', default = ''),
+# SOPORTE PARA database_url (heroku, docker, aws, etc)
+DATABASE_URL = config('DATABASE_URL', default=None)
+if DATABASE_URL:
+    DATABASES = {
+        'default' : dj_database_url.config(
+            default=DATABASE_URL, 
+            conn_max_age=600,
+            ssl_require=config('DB_SSL_REQUIRE', default=False, cast=bool)
+        )
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': config('DB_ENGINE', default='django.db.backends.sqlite3'),
+            'NAME': config('DB_NAME', default = BASE_DIR / 'db.sqlite3'),
+            'USER' : config('DB_USER', default = ''),
+            'PASSWORD' : config('DB_PASSWORD', default = ''),
+            'HOST' : config('DB_HOST', default = ''),
+            'PORT' : config('DB_PORT', default = ''),
+        }
+    }
 
 # REST_FRAMEWORK
 

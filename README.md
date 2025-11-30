@@ -1,9 +1,10 @@
 # VARIABLES DE ENTORNO
 ## LOCAL
     #### SEGURIDAD
+    DJANGO_ENV=local
     DEBUG=True
     SECRET_KEY=django-insecure-clave-super-secreta-para-desarrollo-2024
-    ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
+    DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0
 
     #### BASE DE DATOS (SQLite)
     DB_ENGINE=django.db.backends.sqlite3
@@ -31,6 +32,7 @@
 
 ## PROD
     #### SEGURIDAD - CRÍTICO EN PRODUCCIÓN
+    DJANGO_ENV=local
     DEBUG=False
     SECRET_KEY=tu-clave-super-secreta-muy-larga-y-compleja-aqui-2024-prod
     ALLOWED_HOSTS=midominio.com,www.midominio.com,api.midominio.com,tu-ip-del-servidor
