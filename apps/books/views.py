@@ -8,12 +8,14 @@ from utils.mixins import MultipleSerializerMixin
 
 
 class BookListCreateView(MultipleSerializerMixin, ListCreateAPIView):
+    """ View to list and create books """
     queryset = Book.objects.filter(is_active=True)
     serializer_class = BookSerializer
     serializer_list = BookListSerializer
 
 
 class BookRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    """ View to retrieve, update and delete a book """
     queryset = Book.objects.filter(is_active=True)
     serializer_class = BookSerializer
     serializer_list = BookListSerializer

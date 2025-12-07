@@ -16,7 +16,8 @@ class Book(BaseModel):
     author = models.ForeignKey(
         'authors.Author',
         on_delete=models.CASCADE, #si se elimina la clave el autor, se eliminan los libros
-        verbose_name='Autor'
+        verbose_name='Autor',
+        related_name='books' #Permite acceder a los libros desde el autor
     )
     genre = models.ForeignKey(
         'genres.Genre',

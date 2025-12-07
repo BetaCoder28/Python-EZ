@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import Author
-
+# Other app serializers
+from apps.books.serializers import BooksForAuthorSerializer
 
 class AuthorSerializer(serializers.ModelSerializer): #para crear/actualizar
     """ Serializer to Authors """
@@ -24,6 +25,14 @@ class AuthorListSerializer(serializers.ModelSerializer): #Para listar
         fields = '__all__' #Todos los campos incluyendo IDs
     
 
+class BooksByAuthorListSerializer(serializers.ModelSerializer):
+    """ Serializer to list all the books of an Author """
+    # Traer todos los libros del autor (Relación inversa)
+    books = BooksForAuthorSerializer(many=True, read_only=True)#Se tiene que llamar igual que el related_name del modelo de books
+    #TRAE TODOS LOS CAMPOS DECLARADOS DEL BookSerializer
 
+    class Meta:
+        model = Author
+        fields = ('id', 'name','lastname','age','books')
     
 
