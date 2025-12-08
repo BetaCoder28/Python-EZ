@@ -28,7 +28,8 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'django_filters',
     'corsheaders',
-    'drf_yasg' #Doc automatica con swagger
+    'drf_yasg', #Doc automatica con swagger
+    'rest_framework_simplejwt',
 ] #APPS EXTERNAS
 
 LOCAL_APPS = [
@@ -110,8 +111,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
     ], # Requiere autenticación por defecto
     'DEFAULT_AUTHENTICATION_CLASSES' : [
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'EXCEPTION_HANDLER' : 'apps.core.exceptions.custom_exception_handler', #Respuestas de error consistentes
     'DEFAULT_SCHEMA_CLASS' : 'rest_framework.schemas.coreapi.AutoSchema'

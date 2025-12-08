@@ -26,10 +26,12 @@ class BookListSerializer(serializers.ModelSerializer):
     # Formatear o transformar datos existentes
     # Acceder a relaciones complejas
 
-    """" 1. Se debe declarar el campo 
-         2. definir método que calcula valor
-         método por defecto será:
-         get_nombreCampo(self,obj)        
+    """"
+        Para SerializerMethodField:
+        1. Se debe declarar el campo 
+        2. definir método que calcula valor
+        método por defecto será:
+        get_nombreCampo(self,obj)        
     """
 
     def get_author(self, obj):
@@ -50,7 +52,7 @@ class BookListSerializer(serializers.ModelSerializer):
         model = Book
         fields = ('id','title','description','year','author', 'genre', 'quantity')
 
-
+    
 class BooksForAuthorSerializer(serializers.ModelSerializer):
     """ Serializer to list books for author """
     genre = serializers.SerializerMethodField()
