@@ -25,7 +25,7 @@ class AuthorListSerializer(serializers.ModelSerializer): #Para listar
         fields = '__all__' #Todos los campos incluyendo IDs
     
 
-class BooksByAuthorListSerializer(serializers.ModelSerializer):
+class AuthorBooksListSerializer(serializers.ModelSerializer):
     """ Serializer to list all the books of an Author """
     # Traer todos los libros del autor (Relación inversa)
     books = BooksForAuthorSerializer(many=True, read_only=True)#Se tiene que llamar igual que el related_name del modelo de books
