@@ -3,7 +3,7 @@ from rest_framework.generics import ListAPIView,ListCreateAPIView, RetrieveUpdat
 from rest_framework.response import Response
 
 from .models import Author
-from .serializers import AuthorListSerializer, AuthorSerializer, BooksByAuthorListSerializer
+from .serializers import AuthorListSerializer, AuthorSerializer, AuthorBooksListSerializer
 from utils.mixins import MultipleSerializerMixin
 
 # Heredar MultipleSerializerMixin para serializers diferentes 
@@ -32,4 +32,4 @@ class AuthorRetrieveUpdateDestroyView(MultipleSerializerMixin,RetrieveUpdateDest
 class AuthorBooksListView(ListAPIView):
     """ View to list all the books of an author """
     queryset = Author.objects.prefetch_related('books').all()
-    serializer_class = BooksByAuthorListSerializer
+    serializer_class = AuthorBooksListSerializer
