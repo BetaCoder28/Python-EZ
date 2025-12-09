@@ -29,7 +29,7 @@ class AuthorRetrieveUpdateDestroyView(MultipleSerializerMixin,RetrieveUpdateDest
         return Response({'message' : 'Autor eliminado correctamente'}, status=status.HTTP_200_OK)
 
 
-class BooksByAuthorListView(ListAPIView):
+class AuthorBooksListView(ListAPIView):
     """ View to list all the books of an author """
     queryset = Author.objects.prefetch_related('books').all()
     serializer_class = BooksByAuthorListSerializer
