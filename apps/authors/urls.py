@@ -1,7 +1,7 @@
 from django.urls import path
 
 from apps.authors.views import (
-    AuthorListCreateView, AuthorRetrieveUpdateDestroyView, BooksByAuthorListView
+    AuthorListCreateView, AuthorRetrieveUpdateDestroyView, AuthorBooksListView
 )
 
 urlpatterns = [
@@ -17,7 +17,7 @@ urlpatterns = [
     ), #GET/PUT/DELETE especifico -> http://localhost:8000/author/1580/
     path(
         'author/<int:id>/books/',
-        BooksByAuthorListView.as_view(),
+        AuthorBooksListView.as_view(),
         name='author-books'
     ), 
 ]
