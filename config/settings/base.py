@@ -14,6 +14,8 @@ SECRET_KEY = config('SECRET_KEY', default='clave-por-defecto') #clave cripto par
 DEBUG = config('DEBUG', default=True, cast=bool)
 ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv()) #Dominios permitidos para servir el API
 
+AUTH_USER_MODEL = 'users.CustomUser'
+
 # Application definition
 DJANGO_APPS = [
     'django.contrib.admin',
@@ -37,6 +39,7 @@ LOCAL_APPS = [
     'apps.authors',
     'apps.genres',
     'apps.books',
+    'apps.users',
 ] #APPS DEL PROYECTO
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
