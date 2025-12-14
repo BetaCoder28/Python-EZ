@@ -21,7 +21,7 @@ class UserListCreateView(MultipleSerializerMixin, ListCreateAPIView):
 
 class UserRetrieveUpdateDestroyView(MultipleSerializerMixin, RetrieveUpdateDestroyAPIView):
     """ View to retrieve, update and delete an user """
-    queryset = CustomUser.objects.filter(is_active=True)
+    queryset = CustomUser.objects.filter(is_active=True, is_staff=False)
     serializer_class = UserSerializer
     serializer_list = UserListSerializer
     lookup_field = 'id'
