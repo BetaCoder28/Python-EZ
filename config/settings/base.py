@@ -1,4 +1,5 @@
 # Base configuration shared with all environments
+from datetime import timedelta
 import os
 from pathlib import Path
 from decouple import config, Csv # Usa python decouple para leer variables de entorno
@@ -32,6 +33,7 @@ THIRD_PARTY_APPS = [
     'corsheaders',
     'drf_yasg', #Doc automatica con swagger
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist'
 ] #APPS EXTERNAS
 
 LOCAL_APPS = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware', #Middleware de cors
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'apps.core.middleware.JWTCookieMiddleware', #Middleware de cookies JWT
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -114,6 +117,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated'
     ], # Requiere autenticación por defecto
     'DEFAULT_AUTHENTICATION_CLASSES' : [
+        'apps.core.authentication.JWTCookieAuthentication', #Autenticación por cookies
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'EXCEPTION_HANDLER' : 'apps.core.exceptions.custom_exception_handler', #Respuestas de error consistentes
@@ -149,7 +153,42 @@ CORS_ALLOWED_ORIGINS = config(
     cast=Csv()
 ) #Origenes especificos permitidos
 
+# permite enviar cookies en CORS
+CORS_ALLOW_CREDENTIALS = True
+
 CORS_ALLOW_ALL_ORIGINS = config('CORS_ALLOW_ALL_ORIGINS', default=False, cast=bool)
+
+# JWT CONFIGURATION
+SIMPLE_JWT = {
+    # Tiempos de vida
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=config('JWT_ACCESS_TOKEN_LIFETIME_MINUTES',default=15, cast=int)),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=config('JWT_REFRESH_TOKEN_LIFETIME_DAYS',default=1, cast=int)),
+    # Cambiar y bloquear tokens después de usar
+    'ROTATE_REFRESH_TOKENS': config('JWT_ROTATE_REFRESH_TOKENS', default=True, cast=bool),
+    'BLACKLIST_AFTER_ROTATION' : config('JWT_BLACKLIST_AFTER_ROTATION', default=True, cast=bool),
+    #Algoritmo y firma para criptografía 
+    'ALGORITHM' : config('JWT_ALGORITHM', default='HS256'),
+    'SIGNING_KEY' : config('JWT_SIGNING_KEY', default=SECRET_KEY),
+    # HEADER HTTP estándar para jwt
+    # Permite-> Authorization: Bearer, JWT, Token
+    'AUTH_HEADER_TYPES' : ('Bearer',),
+    # Nombre del header
+    'AUTH_HEADER_NAME' : 'HTTP_AUTHORIZATION',
+    # campo del User elegido como id
+    'USER_ID_FIELD' : 'id',
+    # Id para el token
+    'USER_ID_CLAIM' : 'user_id',
+    # Seguridad en el navegador
+    'AUTH_COOKIE' : 'access_token', #Nombre de la cookie de autenticación
+    # False -> HTTP, True -> HTTPS
+    'AUTH_COOKIE_SECURE' : not DEBUG,
+    # NO MOSTRAR LAS COOKIES JWT en JS
+    'AUTH_COOKIE_HTTP_ONLY' : True,
+    # Permitir cookies desde diferentes sitios
+    'AUTH_COOKIE_SAMESITE' : 'Lax',
+    # Controla a qué rutas se envía la cookie
+    'AUTH_COOKIE_PATH' : '/',
+}
 
 
 #CSRF SETTINGS -> protección contra CROSS SITE REQUEST FORGERY(falsificación de solicitudes entre sitios)
